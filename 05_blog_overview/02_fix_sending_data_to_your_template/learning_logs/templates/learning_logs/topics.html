@@ -1,16 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Learning Log</title>
-</head>
-<body>
-    <nav>
-        <a href="{% url 'learning_logs:index' %}">Learning Logs</a>
-        <a href="{% url 'learning_logs:topics' %}">All Topics</a>
-    </nav>
+{% extends "learning_logs/base.html" %}
 
+{% block content %}
+    
     <h1>Topics</h1>
 
-</body>
-</html>
+    <ul>
+    {% for topic in topics %}
+        <li>{{ topic }}</li>
+
+        <ul>
+            {% for entry in topic.entry_set.all %}
+                <li>{{ entry.text }}</li>
+            {% empty %}
+                <li>No logs for this topic.</li>
+            {% endfor %}
+        </ul>
+
+    {% empty %}
+        <li>No topics added yet</li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
