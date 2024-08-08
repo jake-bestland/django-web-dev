@@ -14,7 +14,7 @@ def topics(request):
     return render(request, 'learning_logs/topics.html', context)
 
 def entry(request, pk):
-    """Displays the full text of a a learning entry."""
+    """Displays the full text of a learning entry."""
     entry = Entry.objects.get(pk=pk)
-    return render(request, 'learning_logs/entry.html')
+    return render(request, 'learning_logs/entry.html', {'entry': entry})
     
